@@ -23,7 +23,10 @@ class BaseTypeHelper {
 		if(moduleName != self.name && (moduleName + IMPL_SUFFIX) != self.name && (moduleName + FIELDS_SUFFIX) != self.name) {
 			return moduleMembers;
 		}
-		return moduleMembers.slice(0, moduleMembers.length - 2);
+		var args = Sys.args();
+		var packageName = args[args.length - 1];
+
+		return moduleMembers.slice(0, moduleMembers[0] == packageName ? moduleMembers.length - 2 : moduleMembers.length - 1);
 	}
 
 	public static function uniqueName(self: BaseType, removeSpecialSuffixes: Bool = true): String {
